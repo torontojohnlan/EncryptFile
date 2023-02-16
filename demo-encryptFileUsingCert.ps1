@@ -1,6 +1,4 @@
-﻿#New-SelfSignedCertificate -Type Custom -Subject "E=john.lan@bmo.com,CN=John Lan" -TextExtension @("2.5.29.37={text}1.3.6.1.5.5.7.3.4","2.5.29.17={text}email=john.lan@bmo.com&upn=john.lan@bmo.com") -KeyAlgorithm RSA -KeyLength 2048 -SmimeCapabilities -CertStoreLocation "Cert:\CurrentUser\My"
-
-#
+﻿
 # step 1:   create a certificate, make private key exportable, non-protected
 #           copy and save cert thumprint, which will be used in step 4 script
 # New-SelfSignedCertificate  -Subject "E=john.lan@bmo.com,CN=John Lan"  -CertStoreLocation "Cert:\CurrentUser\My"  -KeyExportPolicy Exportable  -Provider "Microsoft RSA SChannel Cryptographic Provider"
