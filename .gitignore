@@ -1,0 +1,14 @@
+/.vscode
+/appsettings.json
+/decrypted.txt
+/encrypted.txt
+/joined.txt
+/list-MFA.ps1.txt
+/Meixian.jpg
+/orginal.txt
+/original.html
+/QiangLan.jpg
+/result.csv
+/selfSignedCert.cer
+/thinkbook-3rdparty-cert.pfx
+/varonis training.png
