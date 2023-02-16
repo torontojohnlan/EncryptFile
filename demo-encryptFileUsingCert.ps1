@@ -2,7 +2,7 @@
 # step 1:   create a certificate, make private key exportable, non-protected
 #           copy and save cert thumprint, which will be used in step 4 script
 # New-SelfSignedCertificate  -Subject "E=john.lan@bmo.com,CN=John Lan"  -CertStoreLocation "Cert:\CurrentUser\My"  -KeyExportPolicy Exportable  -Provider "Microsoft RSA SChannel Cryptographic Provider"
-
+# CSP chosen above determines what encryption/padding mode are supported. For RSA/, only oeapSHA1 and PKCS1 supported
 
 #
 # Step 2:   export certificate to a file (without private key) / in OS. Give the cert file to client
@@ -47,7 +47,7 @@ param(
 )
     # Encrypts a string with a public key
     # try{$EncryptedByteArray = $PublicCert.PublicKey.Key.Encrypt($ByteArray,$true)} #this overload works only in PS5
-    try{$EncryptedByteArray = $PublicCert.PublicKey.Key.Encrypt($ByteArray,[System.Security.Cryptography.RSAEncryptionPadding]::OaepSHA256)} # overload works in PS7
+    try{$EncryptedByteArray = $PublicCert.PublicKey.Key.Encrypt($ByteArray,[System.Security.Cryptography.RSAEncryptionPadding]::OaepSHA1)} # overload works in PS7
         catch{throw "exception from Encrypt-Asymmetric: `r`n $(_.categoaryInfo)"}
     $EncryptedBase64String = [Convert]::ToBase64String($EncryptedByteArray)
 
@@ -73,7 +73,7 @@ param(
         # $ClearText = [System.Text.Encoding]::UTF8.GetString($Cert.PrivateKey.Decrypt($EncryptedByteArray,$true))
         #
         #$ClearText = [System.Text.Encoding]::UTF8.GetString($Cert.PrivateKey.Decrypt($EncryptedByteArray,[System.Security.Cryptography.RSAEncryptionPadding]::OaepSHA256))
-        [byte[]]$ClearText = ($Cert.PrivateKey.Decrypt($EncryptedByteArray,[System.Security.Cryptography.RSAEncryptionPadding]::OaepSHA256))
+        [byte[]]$ClearText = ($Cert.PrivateKey.Decrypt($EncryptedByteArray,[System.Security.Cryptography.RSAEncryptionPadding]::OaepSHA1))
         #returns a byte[] directly rather than a string
     }
     Else {Write-Error "Please provide a valid certificate!"}
