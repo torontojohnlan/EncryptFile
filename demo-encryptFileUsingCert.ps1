@@ -165,3 +165,24 @@ foreach ($line in $encyptedTxt){
 
 #
 #endregion decrypting
+
+#region
+<#
+    # Encrypt objects in memory so we only write encrypted content to disk
+
+    $users=get-aduser -filter *
+    $csv = users | convertto-csv -noTypeInformation
+    $byteArray = [system.text.encoding]::unicode.GetBytes(([string[]])$csv -join "`r`n")         # PS & convertto-csv default to unicode
+        # $csv object doesn't have newline char at end, so we need to insert newline between each line
+    $cert = .... #get certificate object from file
+    # see above "encryption region" about how to break $byteArray into encryptable chunks and encrypt
+
+
+    # decrypt and re-assembaly back to a string for output
+    #   1. read encrypted file
+    #   2. decrypt each line
+    #   3. $decryptedLines += (decrypt $line)
+    #   4. $clearText = [system.text.encoding]::unicode.getstring[$decryptedLines]
+
+#>
+#endregion
