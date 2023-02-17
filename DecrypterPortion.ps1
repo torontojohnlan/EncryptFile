@@ -5,7 +5,7 @@
 # step 1:   create a certificate (self-signed cert as example here), make private key exportable, non-protected
 #           copy and save cert thumprint, which will be used to look up this cert from cert store
 
-#           New-SelfSignedCertificate  -Subject "E=john.lan@bmo.com,CN=John Lan"  -CertStoreLocation "Cert:\CurrentUser\My"  -KeyExportPolicy Exportable  -Provider "Microsoft RSA SChannel Cryptographic Provider"
+#           New-SelfSignedCertificate  -Subject "E=john.Doe@johnfoo.tk,CN=John Doe"  -CertStoreLocation "Cert:\CurrentUser\My"  -KeyExportPolicy Exportable  -Provider "Microsoft RSA SChannel Cryptographic Provider"
 
 
 # step 2:   decrypt function 
